@@ -14,13 +14,13 @@ public class MathController {
             @PathVariable("numberOne") String numberOne,
             @PathVariable("numberTwo") String numberTwo
     ){
-        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new IllegalArgumentException();
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
 
         return convertNumberToDouble(numberOne) + convertNumberToDouble(numberTwo);
     }
 
     private Double convertNumberToDouble(String number) {
-        if (number == null || number.isEmpty()) throw new IllegalArgumentException();
+        if (number == null || number.isEmpty()) throw new UnsupportedOperationException("Digite apenas números");
         String formatedNumber = number.replace(",", ".");
         return Double.parseDouble(formatedNumber);
     }
