@@ -19,6 +19,46 @@ public class MathController {
         return convertNumberToDouble(numberOne) + convertNumberToDouble(numberTwo);
     }
 
+    @GetMapping("/sub/{numberOne}/{numberTwo}")
+    public Double sub(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
+        return convertNumberToDouble(numberOne) - convertNumberToDouble(numberTwo);
+    }
+
+    @GetMapping("/mul/{numberOne}/{numberTwo}")
+    public Double mult(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
+        return convertNumberToDouble(numberOne) * convertNumberToDouble(numberTwo);
+    }
+
+    @GetMapping("/div/{numberOne}/{numberTwo}")
+    public Double div(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
+        return convertNumberToDouble(numberOne) / convertNumberToDouble(numberTwo);
+    }
+
+    @GetMapping("/med/{numberOne}/{numberTwo}")
+    public Double med(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
+        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
+        return (convertNumberToDouble(numberOne) + convertNumberToDouble(numberTwo))/2;
+    }
+
+    @GetMapping("/qua/{numberOne}")
+    public int qua(@PathVariable("numberOne") String numberOne){
+        if(!isNumeric(numberOne)) throw new UnsupportedOperationException("Digite apenas números");
+        Double numero = convertNumberToDouble(numberOne);
+        int count = 1;
+        Boolean flag = false;
+        while(!flag) {
+            if(count * count == numero) {
+                flag = true;
+            } else {
+                count = count + 1;
+            }
+        }
+        return (count);
+    }
+
     private Double convertNumberToDouble(String number) {
         if (number == null || number.isEmpty()) throw new UnsupportedOperationException("Digite apenas números");
         String formatedNumber = number.replace(",", ".");
