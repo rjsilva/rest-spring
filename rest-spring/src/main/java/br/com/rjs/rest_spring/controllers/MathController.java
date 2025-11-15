@@ -1,5 +1,6 @@
 package br.com.rjs.rest_spring.controllers;
 
+import br.com.rjs.rest_spring.model.MathModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,60 +15,38 @@ public class MathController {
             @PathVariable("numberOne") String numberOne,
             @PathVariable("numberTwo") String numberTwo
     ){
-        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
-
-        return convertNumberToDouble(numberOne) + convertNumberToDouble(numberTwo);
+        if(!MathModel.isNumeric(numberOne) || !MathModel.isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
+        return MathModel.sum(numberOne, numberTwo);
     }
 
     @GetMapping("/sub/{numberOne}/{numberTwo}")
-    public Double sub(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
-        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
-        return convertNumberToDouble(numberOne) - convertNumberToDouble(numberTwo);
+    public Double subtraction(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
+        if(!MathModel.isNumeric(numberOne) || !MathModel.isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
+        return MathModel.subtraction(numberOne, numberTwo);
     }
 
     @GetMapping("/mul/{numberOne}/{numberTwo}")
-    public Double mult(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
-        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
-        return convertNumberToDouble(numberOne) * convertNumberToDouble(numberTwo);
+    public Double multiplication(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
+        if(!MathModel.isNumeric(numberOne) || !MathModel.isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
+        return MathModel.multiplication(numberOne, numberTwo);
     }
 
     @GetMapping("/div/{numberOne}/{numberTwo}")
-    public Double div(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
-        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
-        return convertNumberToDouble(numberOne) / convertNumberToDouble(numberTwo);
+    public Double division(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
+        if(!MathModel.isNumeric(numberOne) || !MathModel.isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
+        return MathModel.division(numberOne, numberTwo);
     }
 
     @GetMapping("/med/{numberOne}/{numberTwo}")
-    public Double med(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
-        if(!isNumeric(numberOne) || !isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
-        return (convertNumberToDouble(numberOne) + convertNumberToDouble(numberTwo))/2;
+    public Double average(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo){
+        if(!MathModel.isNumeric(numberOne) || !MathModel.isNumeric(numberTwo)) throw new UnsupportedOperationException("Digite apenas números");
+        return MathModel.average(numberOne, numberTwo);
     }
 
-    @GetMapping("/qua/{numberOne}")
-    public int qua(@PathVariable("numberOne") String numberOne){
-        if(!isNumeric(numberOne)) throw new UnsupportedOperationException("Digite apenas números");
-        Double numero = convertNumberToDouble(numberOne);
-        int count = 1;
-        Boolean flag = false;
-        while(!flag) {
-            if(count * count == numero) {
-                flag = true;
-            } else {
-                count = count + 1;
-            }
-        }
-        return (count);
+    @GetMapping("/squ/{numberOne}")
+    public int squarRoot(@PathVariable("numberOne") String number){
+        if(!MathModel.isNumeric(number)) throw new UnsupportedOperationException("Digite apenas números");
+        return MathModel.calculateSquareRoot(number);
     }
 
-    private Double convertNumberToDouble(String number) {
-        if (number == null || number.isEmpty()) throw new UnsupportedOperationException("Digite apenas números");
-        String formatedNumber = number.replace(",", ".");
-        return Double.parseDouble(formatedNumber);
-    }
-
-    private boolean isNumeric(String number) {
-        if (number == null || number.isEmpty()) return false;
-        String formatedNumber = number.replace(",", ".");
-        return formatedNumber.matches("[-+]?[0-9]*\\.?[0-9]+");
-    }
 }
