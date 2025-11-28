@@ -1,10 +1,10 @@
-package br.com.rjs.rest_spring.dao;
+package br.com.rjs.rest_spring.repository;
 import br.com.rjs.rest_spring.model.Person;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class PersonRepository {
+public class PersonRepositoryLegado {
 
     private final static List<Person> people = new ArrayList<>();
     private final static AtomicInteger counter = new AtomicInteger(0);
@@ -26,7 +26,8 @@ public class PersonRepository {
         }
     }
 
-    public static void atualizar(int id, Person person){
+    /*
+      public static void atualizar(Person person){
         Person personUpdated = people.get(person.getId());
         personUpdated.setId(id);
         personUpdated.setAddress(person.getAddress());
@@ -35,4 +36,6 @@ public class PersonRepository {
         people.add(personUpdated);
         people.remove(id);
     }
+     */
+
 }
