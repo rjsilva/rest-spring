@@ -1,13 +1,22 @@
 package br.com.rjs.rest_spring.model;
 
+import jakarta.persistence.*;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Entity
+@Table(name = "TB_name")
 public class Person {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "name", nullable = false, length = 100)
     private String  name;
+    @Column(nullable = false, length = 100)
     private String address;
+    @Column(nullable = false, length = 6)
     private Character gender;
-    private int id;
 
     public String getName() {
         return name;
@@ -33,20 +42,19 @@ public class Person {
         this.gender = gender;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Person(int id, String name, String address, Character gender){
+    public Person(long id, String name, String address, Character gender){
         this.id = id;
         this.name = name;
         this.address = address;
         this.gender = gender;
     }
-
-
+    public Person(){}
 }
