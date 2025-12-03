@@ -1,5 +1,6 @@
 package br.com.rjs.rest_spring.service;
 
+import br.com.rjs.rest_spring.dto.NewPersonRequestDto;
 import br.com.rjs.rest_spring.dto.PersonRequestDto;
 import br.com.rjs.rest_spring.dto.PersonResponseDto;
 import br.com.rjs.rest_spring.exception.ResourceNotFoundException;
@@ -26,6 +27,12 @@ public class PersonService {
     public PersonResponseDto addPerson(PersonRequestDto personRequestDto){
         logger.warn("Adicionando uma person");
         Person person = personMapper.toEntity(personRequestDto);
+        return personMapper.toResponse(personRepository.save(person));
+    }
+
+    public PersonResponseDto addNewPerson(NewPersonRequestDto newPersonRequestDto){
+        logger.warn("Adicionando uma nova person");
+        Person person = personMapper.toNewEntity(newPersonRequestDto);
         return personMapper.toResponse(personRepository.save(person));
     }
 

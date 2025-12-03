@@ -11,8 +11,8 @@ public class PersonRepositoryLegado {
 
     public static void addPerson(Person person){
         int newValue = counter.getAndIncrement();
-        Person p = new Person(newValue, person.getName(), person.getAddress(), person.getGender());
-        people.add(p);
+        //Person p = new Person(newValue, person.getName(), person.getAddress(), person.getGender());
+        //people.add(p);
     }
 
     public static List<Person> getAllPeople(){

@@ -2,7 +2,6 @@ package br.com.rjs.rest_spring.controllers;
 
 import br.com.rjs.rest_spring.dto.PersonRequestDto;
 import br.com.rjs.rest_spring.dto.PersonResponseDto;
-import br.com.rjs.rest_spring.model.Person;
 import br.com.rjs.rest_spring.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,5 +1,6 @@
 package br.com.rjs.rest_spring.mapper;
 
+import br.com.rjs.rest_spring.dto.NewPersonRequestDto;
 import br.com.rjs.rest_spring.dto.PersonRequestDto;
 import br.com.rjs.rest_spring.dto.PersonResponseDto;
 import br.com.rjs.rest_spring.model.Person;
@@ -10,6 +11,8 @@ import org.mapstruct.MappingTarget;
 public interface PersonMapper {
 
     Person toEntity(PersonRequestDto dto);
+
+    Person toNewEntity(NewPersonRequestDto dto);
 
     PersonResponseDto toResponse(Person person);
 
