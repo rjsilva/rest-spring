@@ -1,7 +1,12 @@
 package br.com.rjs.rest_spring.dto;
 
+import java.util.Date;
+
 public record PersonResponseDto(
         Long id,
-        String name
+        String  name,
+        String address,
+        Date birthDay,
+        Character gender
 ) {
 }

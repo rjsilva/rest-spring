@@ -1,8 +1,9 @@
 package br.com.rjs.rest_spring.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Date;
 
 @Entity
 @Table(name = "TB_name")
@@ -13,6 +14,9 @@ public class Person {
     private Long id;
     @Column(name = "name", nullable = false, length = 100)
     private String  name;
+    @Column(length = 10)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthDay;
     @Column(nullable = false, length = 100)
     private String address;
     @Column(nullable = false, length = 6)
@@ -50,11 +54,22 @@ public class Person {
         this.id = id;
     }
 
-    public Person(long id, String name, String address, Character gender){
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthday) {
+        this.birthDay = birthday;
+    }
+
+    public Person(long id, String name, Date birthday, String address, Character gender){
         this.id = id;
         this.name = name;
+        this.birthDay = birthday;
         this.address = address;
         this.gender = gender;
     }
+
     public Person(){}
+
 }
