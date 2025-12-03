@@ -1,5 +1,7 @@
 package br.com.rjs.rest_spring.controllers;
 
+import br.com.rjs.rest_spring.dto.PersonRequestDto;
+import br.com.rjs.rest_spring.dto.PersonResponseDto;
 import br.com.rjs.rest_spring.model.Person;
 import br.com.rjs.rest_spring.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +20,14 @@ public class PersonController {
     private PersonService personService;
 
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> addPerson(@RequestBody Person person){
-        if(person == null) throw new UnsupportedOperationException("Person cannot be null");
-        personService.addPerson(person);
+    public ResponseEntity<PersonResponseDto> addPerson(@RequestBody PersonRequestDto dto){
+        personService.addPerson(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Person>> getAllPeople(){
-        List<Person> people = personService.getAllPeople();
+    public ResponseEntity<List<PersonResponseDto>> getAllPeople(){
+        List<PersonResponseDto> people = personService.getAllPeople();
         return ResponseEntity.status(HttpStatus.OK).body(people);
     }
 
@@ -37,8 +38,8 @@ public class PersonController {
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updatePerson(@PathVariable Long id, @RequestBody Person person){
-        personService.updatePerson(id, person);
+    public ResponseEntity<PersonResponseDto> updatePerson(@PathVariable Long id, @RequestBody PersonRequestDto dto){
+        personService.updatePerson(id, dto);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
