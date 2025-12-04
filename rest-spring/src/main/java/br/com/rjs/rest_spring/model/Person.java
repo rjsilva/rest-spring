@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "TB_name")
+@Table(name = "tb_name")
 public class Person {
 
     @Id
@@ -14,12 +14,12 @@ public class Person {
     private Long id;
     @Column(name = "name", nullable = false, length = 100)
     private String  name;
-    @Column(length = 10)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "birth_day", length = 10)
     private Date birthDay;
     @Column(nullable = false, length = 100)
     private String address;
-    @Column(nullable = false, length = 6)
+    @Column(nullable = false)
     private Character gender;
 
     public String getName() {
@@ -58,14 +58,14 @@ public class Person {
         return birthDay;
     }
 
-    public void setBirthDay(Date birthday) {
-        this.birthDay = birthday;
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
     }
 
-    public Person(long id, String name, Date birthday, String address, Character gender){
+    public Person(long id, String name, Date birthDay, String address, Character gender){
         this.id = id;
         this.name = name;
-        this.birthDay = birthday;
+        this.birthDay = birthDay;
         this.address = address;
         this.gender = gender;
     }
