@@ -31,6 +31,12 @@ dependencies {
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.flywaydb:flyway-mysql")
 
+	// For XML support
+	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+
+	// For YAML support
+	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml")
+
 	// Driver MySQL
 	runtimeOnly("com.mysql:mysql-connector-j")
 }
