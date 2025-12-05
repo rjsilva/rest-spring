@@ -18,25 +18,25 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add")
     public ResponseEntity<PersonResponseDto> addPerson(@RequestBody PersonRequestDto dto){
         personService.addPerson(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/all")
     public ResponseEntity<List<PersonResponseDto>> getAllPeople(){
         List<PersonResponseDto> people = personService.getAllPeople();
         return ResponseEntity.status(HttpStatus.OK).body(people);
     }
 
-    @DeleteMapping(value = "/delete/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Void> deletePerson(@PathVariable Long id){
         personService.removedPersonById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}")
     public ResponseEntity<PersonResponseDto> updatePerson(@PathVariable Long id, @RequestBody PersonRequestDto dto){
         personService.updatePerson(id, dto);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
