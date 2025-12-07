@@ -10,8 +10,8 @@ import br.com.rjs.rest_spring.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -24,9 +24,9 @@ public class PersonService {
 
     private final Logger logger = LoggerFactory.getLogger(PersonService.class.getName());
 
-    public PersonResponseDto addPerson(PersonRequestDto personRequestDto){
+    public PersonResponseDto addPerson(PersonRequestDto dto){
         logger.warn("Adicionando uma person");
-        Person person = personMapper.toEntity(personRequestDto);
+        Person person = personMapper.toEntity(dto);
         return personMapper.toResponse(personRepository.save(person));
     }
 
@@ -38,7 +38,10 @@ public class PersonService {
 
     public List<PersonResponseDto> getAllPeople(){
         logger.warn("Recuperando uma lista de pessoas");
-        return personRepository.findAll().stream().map(personMapper::toResponse).toList();
+        return personRepository.findAll()
+                .stream()
+                .map(personMapper::toResponse)
+                .toList();
     }
 
     public void removedPersonById(Long id){
@@ -49,10 +52,16 @@ public class PersonService {
         personRepository.deleteById(id);
     }
 
-    public void updatePerson(Long id, PersonRequestDto dto){
+    public PersonResponseDto updatePerson(Long id, PersonRequestDto dto){
         logger.warn("Atualizando uma pessoa da lista");
         Person entity = personRepository.findById(id).orElseThrow( () -> new ResourceNotFoundException("Person not found"));
         personMapper.updateEntity(dto, entity);
-        personRepository.save(entity);
+        Person person = personRepository.save(entity);
+        return personMapper.toResponse(person);
+    }
+
+    public PersonResponseDto findById(Long id){
+        Person entity = personRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Person no found"));
+        return personMapper.toResponse(entity);
     }
 }

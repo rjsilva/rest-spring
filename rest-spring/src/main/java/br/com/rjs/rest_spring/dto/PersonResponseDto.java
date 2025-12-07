@@ -1,8 +1,6 @@
 package br.com.rjs.rest_spring.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import java.util.Date;
 
 public record PersonResponseDto(
