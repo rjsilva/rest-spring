@@ -24,4 +24,4 @@ spring:
 
 logging:
   level:
-    ROOT: debug
+    ROOT: warn
