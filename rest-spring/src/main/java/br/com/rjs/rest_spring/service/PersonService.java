@@ -10,7 +10,6 @@ import br.com.rjs.rest_spring.model.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
