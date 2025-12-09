@@ -19,8 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
@@ -95,9 +94,14 @@ class PersonServiceTest {
 
         PersonResponseDto resp = new PersonResponseDto(1L, "joao", 'M',"rua teste", null);
 
-        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(person));
-        Mockito.when(repository.save(person)).thenReturn(person);
-        Mockito.when(mapper.toResponse(person)).thenReturn(resp);
+        //Mockito.when(repository.findById(1L)).thenReturn(Optional.of(person));
+        //Mockito.when(repository.save(person)).thenReturn(person);
+        //Mockito.when(mapper.toResponse(person)).thenReturn(resp);
+
+        when(repository.findById(1L)).thenReturn(Optional.of(person));
+        doNothing().when(mapper).updateEntity(dto, person);
+        when(repository.save(person)).thenReturn(person);
+        when(mapper.toResponse(person)).thenReturn(resp);
 
         // Act
         PersonResponseDto result = service.updatePerson(1L, dto);

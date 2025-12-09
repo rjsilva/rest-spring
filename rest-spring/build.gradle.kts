@@ -1,6 +1,6 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.5.7"
+	id("org.springframework.boot") version "3.5.8"
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
 	implementation ("org.springframework.boot:spring-boot-starter-hateoas")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.14")
 	implementation("org.mapstruct:mapstruct:1.5.5.Final")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 	implementation("org.springframework.boot:spring-boot-starter-web")
