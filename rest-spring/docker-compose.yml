@@ -1,0 +1,16 @@
+services:
+  claude:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    container_name: claude-dev
+    working_dir: /workspace
+    volumes:
+      - .:/workspace
+      - ~/.anthropic:/root/.anthropic
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - SHELL=/bin/bash
+    command: sleep infinity
+    stdin_open: true
+    tty: true
